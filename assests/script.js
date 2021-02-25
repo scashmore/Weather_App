@@ -1,18 +1,26 @@
 //Script
-var apiKey = '385c0b950097c66bff864ee7edcaf22f'
-var city = 'brevard';
-// var state = 'nc'
-var unit = 'imperial';
-var cityUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=' + unit;
-var forcastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + apiKey + '&units=' + unit;
+// var apiKey = '385c0b950097c66bff864ee7edcaf22f'
+// var city = 'brevard';
+// // var state = 'nc'
+// var unit = 'imperial';
+// var cityUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=' + unit;
+//var forcastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + apiKey + '&units=' + unit;
 
-function start() {
+
+
+function weatherApp() {
+    var apiKey = '385c0b950097c66bff864ee7edcaf22f'
+    var city = 'brevard';
+    // var state = 'nc'
+    var unit = 'imperial';
+    var cityUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=' + unit;
+    var forcastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + apiKey + '&units=' + unit;
     fetch(cityUrl)
         .then(function (r) {
             return r.json();
         })
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             weather = document.querySelector('#weather');
             weather.textContent = "Today's Current Tempature: " + parseInt(data.main.temp);
             var lat = parseInt(data.coord.lat);
@@ -23,15 +31,11 @@ function start() {
                     return ur.json();
                 })
                 .then(function (data) {
-                console.log(data.list[0].uvi);
-                uvi = document.querySelector('#uvi');
-                uvi.textContent = "UV Index: " + parseInt(data.list[0].uvi);
+                    //console.log(data.list[0].uvi);
+                    uvi = document.querySelector('#uvi');
+                    uvi.textContent = "UV Index: " + parseInt(data.list[0].uvi);
                 })
         })
-};
-
-
-function test() {
     fetch(forcastUrl)
         .then(function (r) {
             return r.json();
@@ -59,6 +63,5 @@ function test() {
             weather36.textContent = "6 P.M. : " + parseInt(data.list[20].main.temp);
 
         })
-}
-start();
-test();
+};
+weatherApp();
