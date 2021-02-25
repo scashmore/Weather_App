@@ -1,6 +1,11 @@
 //Script
 var form = document.querySelector('#submit');
 var city = document.querySelector('#userCity');
+function today() {
+    var currentTime = moment().format('MM/Do/YY');
+    document.querySelector('#currentTime').textContent(currentTime);
+};
+today();
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
