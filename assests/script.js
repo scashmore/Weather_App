@@ -5,7 +5,8 @@ var city = document.querySelector('#userCity');
 form.addEventListener('submit', function (event) {
     event.preventDefault();
     console.log(city.value);
-
+    var apiKey = '385c0b950097c66bff864ee7edcaf22f'
+    var unit = 'imperial'
     var cityUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city.value + '&appid=' + apiKey + '&units=' + unit;
     var forcastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city.value + '&appid=' + apiKey + '&units=' + unit;
     fetch(cityUrl)
@@ -13,9 +14,13 @@ form.addEventListener('submit', function (event) {
             return r.json();
         })
         .then(function (data) {
-            //console.log(data);
+            console.log(data);
             weather = document.querySelector('#weather');
+            hum = document.querySelector('#hum');
+            wind = document.querySelector('#wind');
             weather.textContent = "Today's Current Tempature: " + parseInt(data.main.temp) + "°F";
+            hum.textContent = "Humidity: " + parseInt(data.main.humidity) + "%"
+            wind.textContent = "Wind Speed: " + parseInt(data.wind.speed) + " MPH" 
             var lat = parseInt(data.coord.lat);
             var lon = parseInt(data.coord.lon);
             var UV = 'http://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
